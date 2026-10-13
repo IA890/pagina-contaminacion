@@ -1,0 +1,189 @@
+body > div {
+	position: relative;
+	z-index: 2;
+}
+
+.reproductor-musica {
+	position: relative;
+	z-index: 3;
+	width: min(360px, calc(100vw - 32px));
+	margin: 24px auto 32px;
+	padding: 16px 18px 14px;
+	box-sizing: border-box;
+	border: 1px solid rgba(120, 223, 213, 0.4);
+	border-radius: 12px;
+	background: rgba(8, 20, 27, 0.88);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34), 0 0 22px rgba(58, 201, 180, 0.12);
+	color: #f2fffc;
+	font-family: Arial, sans-serif;
+}
+
+.reproductor-controles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+}
+
+.reproductor-controles button {
+	display: grid;
+	place-items: center;
+	width: 42px;
+	height: 42px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid rgba(191, 231, 224, 0.28);
+	border-radius: 50%;
+	background: rgba(239, 255, 251, 0.08);
+	background-image: none;
+	color: #f2fffc;
+	-webkit-text-fill-color: currentColor;
+	text-shadow: none;
+	font-size: 19px;
+	cursor: pointer;
+	transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.reproductor-controles button:hover {
+	transform: translateY(-2px);
+	border-color: #74e0ce;
+	background: rgba(116, 224, 206, 0.18);
+}
+
+.reproductor-controles button:focus-visible,
+.reproductor-barra-progreso:focus-visible {
+	outline: 2px solid #ffcc72;
+	outline-offset: 3px;
+}
+
+.reproductor-controles .reproductor-boton-principal {
+	width: 50px;
+	height: 50px;
+	border-color: #75e2cf;
+	background: #75e2cf;
+	color: #08201e;
+	font-size: 21px;
+}
+
+.reproductor-informacion {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.reproductor-cancion {
+	min-width: 0;
+	width: auto;
+	max-width: none;
+	margin: 0;
+	overflow: hidden;
+	background: none;
+	-webkit-text-fill-color: currentColor;
+	color: #f2fffc;
+	font-size: 13px;
+	font-weight: 600;
+	text-shadow: none;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.reproductor-visualizador {
+	display: flex;
+	flex: 0 0 28px;
+	align-items: center;
+	justify-content: space-between;
+	height: 20px;
+}
+
+.reproductor-visualizador span {
+	width: 3px;
+	height: 5px;
+	border-radius: 4px;
+	background: #75e2cf;
+}
+
+.reproductor-visualizador.reproduciendo span {
+	animation: barras-musica 650ms ease-in-out infinite alternate;
+}
+
+.reproductor-visualizador.reproduciendo span:nth-child(2) {
+	animation-delay: 140ms;
+}
+
+.reproductor-visualizador.reproduciendo span:nth-child(3) {
+	animation-delay: 280ms;
+}
+
+.reproductor-visualizador.reproduciendo span:nth-child(4) {
+	animation-delay: 90ms;
+}
+
+.reproductor-visualizador.reproduciendo span:nth-child(5) {
+	animation-delay: 220ms;
+}
+
+@keyframes barras-musica {
+	from { height: 4px; }
+	to { height: 19px; }
+}
+
+.reproductor-barra-progreso {
+	display: block;
+	width: 100%;
+	height: 6px;
+	margin: 10px 0 3px;
+	border-radius: 99px;
+	appearance: none;
+	background: linear-gradient(to right, #75e2cf var(--progreso, 0%), rgba(233, 248, 244, 0.24) var(--progreso, 0%));
+	cursor: pointer;
+}
+
+.reproductor-barra-progreso::-webkit-slider-thumb {
+	width: 14px;
+	height: 14px;
+	border: 2px solid #08201e;
+	border-radius: 50%;
+	appearance: none;
+	background: #ffcc72;
+	box-shadow: 0 0 0 3px rgba(255, 204, 114, 0.16);
+	transition: transform 150ms ease;
+}
+
+.reproductor-barra-progreso::-moz-range-thumb {
+	width: 10px;
+	height: 10px;
+	border: 2px solid #08201e;
+	border-radius: 50%;
+	background: #ffcc72;
+	box-shadow: 0 0 0 3px rgba(255, 204, 114, 0.16);
+	transition: transform 150ms ease;
+}
+
+.reproductor-barra-progreso:hover::-webkit-slider-thumb,
+.reproductor-barra-progreso:hover::-moz-range-thumb {
+	transform: scale(1.2);
+}
+
+.reproductor-tiempos {
+	display: flex;
+	justify-content: space-between;
+	color: rgba(242, 255, 252, 0.72);
+	font-size: 11px;
+	font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reproductor-controles button,
+	.reproductor-barra-progreso::-webkit-slider-thumb,
+	.reproductor-barra-progreso::-moz-range-thumb {
+		transition: none;
+	}
+
+	.reproductor-visualizador.reproduciendo span {
+		animation: none;
+		height: 10px;
+	}
+}
