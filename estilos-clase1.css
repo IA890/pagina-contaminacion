@@ -411,3 +411,7 @@ button:focus-visible {
     border: none;
     margin: 20px auto;
 }
+
+.mi {
+margin: 30px;
+}
